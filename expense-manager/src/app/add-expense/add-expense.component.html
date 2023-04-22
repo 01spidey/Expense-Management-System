@@ -1,0 +1,49 @@
+<h3>{{title}}</h3>
+
+<div class="card">
+        <form (ngSubmit)="onSubmit()" [formGroup]="expenseForm" >
+            
+            <div class="item">
+                <label>Description</label>
+                <input type="text" placeholder="Description" formControlName="desc">
+            </div>
+            
+        
+            <div class="item">
+                <label>Category</label>
+                <select formControlName="cat">
+                    <option value="" disabled selected>-- select --</option>
+                    <option value="Housing">Housing</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Food">Food</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            
+            <div class="item">
+                <label>Date of Expense</label>
+                <input type="date" formControlName="date">
+            </div>
+            
+            <div class="item">
+                <label>Amount</label>
+                <input type="text" placeholder="Amount" formControlName="amt">
+            </div>
+            
+
+            <div class="btns">
+                <button id="add">{{action}}</button>
+                <button type="button" id="close" (click)="close()">Close</button>
+            </div>
+            
+        </form>
+        
+        
+        
+ 
+    
+    
+
+</div>

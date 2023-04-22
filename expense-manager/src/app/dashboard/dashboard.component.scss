@@ -1,0 +1,129 @@
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color:#4ca1cb;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    .logo{
+        // height: 100%;
+        // background-color: #35363aff;
+        padding: 0px 20px;
+        display: flex;
+        align-items: center;
+        width: 200px;
+        gap: 5px;
+        span{
+            color: white;
+            font-size: 27px;
+        }
+        p{
+            font-size: 20px;
+            color: white;
+            text-align: left;
+        }
+    }
+
+    .search{
+        flex: 1;
+        background-color: white;
+        height: 80%;
+        border-radius: 5px;
+    }
+
+    .user{
+        height: 100%;
+        padding: 0px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10%;
+
+        p{
+            color: white;
+            border: 1px solid white;
+            padding: 7px 30px;
+            border-radius: 10px;
+            transition: 0.3s ease;
+            cursor: pointer;
+
+            &:hover{
+                background-color: black;
+                border-color: black;
+            }
+        }
+    }
+}
+
+.sidebar{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    z-index: 500;
+    background-color:#35363a;
+    padding-right: 10px;
+    padding-top: 50px;
+    padding-right: 40px;
+
+    .menu{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 300px;
+        padding-left: 20px;
+        padding-top: 50px;
+        gap: 40px;
+
+        #logout{
+            color: #f44336d0;
+            &:hover{
+                background-color: #f44336d0;
+                color: white;
+            }
+        }
+
+        .item{
+            padding:10px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s ease;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: white;
+
+            &:hover{
+                color: #35363a;
+                background-color: white;
+            }
+        }
+
+        .active-title{
+            color: #35363a;
+            background-color: white;
+        }
+    }
+}
+
+.content{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding-top: 3%;
+    padding-left: 16%;
+    overflow-y: scroll;
+}
+
+h1,h2,h3,h4,h5,p{margin: 0px;}

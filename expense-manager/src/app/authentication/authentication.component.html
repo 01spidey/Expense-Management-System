@@ -1,0 +1,96 @@
+<header>
+    <div class="logo">
+        <span class="material-symbols-outlined">
+            savings
+        </span>
+        <p>SpendWise</p>
+    </div>
+</header>
+
+<div class="page">
+    <div class="left-sec">
+        <div class="overlay">
+
+        </div>
+        <div class="card">
+            <div class="tabs">
+                <div class="left-tab" (click)="shiftTab('signup')" [ngClass]="{'active': is_active=='signup'}">
+                    <h3>Sign Up</h3>
+                </div>
+                <div class="right-tab" (click)="shiftTab('login')" [ngClass]="{'active': is_active=='login'}">
+                    <h3>Login</h3>
+                </div>
+            </div>
+
+            <div class="form">
+                <div class="signupForm" *ngIf="is_active=='signup'">
+                    <form [formGroup]="signupForm">
+                        <div class="field">
+                            <p>Username</p>
+                            <input type="text" placeholder="Username" formControlName = "uname">
+                        </div>
+    
+                        <div class="field">
+                            <p>Name</p>
+                            <input type="text" placeholder="Name" formControlName = "name">
+                        </div>
+    
+                        <div class="field">
+                            <p>Password</p>
+                            <input type="password" placeholder="Password" formControlName = "pass">
+                        </div>
+    
+                        <div class="field">
+                            <p>Confirm Password</p>
+                            <input type="text" placeholder="Confirm Password" formControlName = "re_pass">
+                        </div>
+    
+                        <div class="field">
+                            <p>Email</p>
+                            <input type="text" placeholder="Email" formControlName = "mail">
+                        </div>
+                    </form>
+                    <div class="btns">
+                        <button type="submit" (click)="onSubmit('signup')">Signup</button>
+                        <button (click)="reset()">Reset</button>
+                    </div>
+                </div>
+
+                <div class="signupForm loginForm" *ngIf="is_active=='login'" >
+                    <form [formGroup]="loginForm">
+                        <div class="field">
+                            <p>Username</p>
+                            <input autocomplete="on" type="text" placeholder="Username" formControlName = "uname">
+                        </div>
+    
+                        <div class="field">
+                            <p>Password</p>
+                            <input autocomplete="on" type="password" placeholder="Password" formControlName = "pass">
+                        </div>
+    
+                    </form>
+                    <div class="btns">
+                        <button type="submit" (click)="onSubmit('login')">Login</button>
+                        <button (click)="reset()">Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+
+            
+
+        </div>
+        
+    </div>
+    <div class="right-sec">
+        <!-- <div class="tag">
+            <span>
+            <p>Every</p>
+            <p>Penny</p>
+            <p>Matters !</p>
+            </span>
+            
+        </div> -->
+        
+    </div>
+</div>

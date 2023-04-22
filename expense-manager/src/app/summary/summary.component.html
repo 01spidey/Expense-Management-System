@@ -1,0 +1,306 @@
+<div class="page" >
+  
+  <div class="nav-bar">
+    <div class="title">
+      <p>Home / <span>Financial Overview</span></p>
+    </div>
+
+    <div class="nav-btns">
+      <a href="#cards" [ngClass]="{'active':active_section=='analysis'}" (click)="setSection('analysis')">Analysis</a>
+      <a href="#income-summary" [ngClass]="{'active':active_section=='income'}" (click)="setSection('income')">Income</a>
+      <a href="#expense-summary" [ngClass]="{'active':active_section=='expense'}" (click)="setSection('expense')">Expense</a>
+    </div>
+    
+  </div>
+
+  <div id="up-btn">
+    <span class="material-symbols-outlined">
+      expand_less
+    </span>
+  </div>
+  
+
+  <section style="justify-content: center;align-items:center;padding-top:0px" id="generate">
+    
+    <div class="cont">
+      <div class="date-layout">
+        <div class="header">
+          <h3>Generate Insights</h3>
+        </div>
+        <div class="date-getter">
+          <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="startDp" [formControl]="start_date">
+            <mat-datepicker-toggle matSuffix [for]="startDp"></mat-datepicker-toggle>
+            <mat-datepicker #startDp
+                            startView="multi-year"
+                            (yearSelected)="chosenStartYearHandler($event)"
+                            (monthSelected)="chosenStartMonthHandler($event, startDp)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="endDp" [formControl]="end_date">
+            <mat-datepicker-toggle matSuffix [for]="endDp"></mat-datepicker-toggle>
+            <mat-datepicker #endDp
+                            startView="multi-year"
+                            (yearSelected)="chosenEndYearHandler($event)"
+                            (monthSelected)="chosenEndMonthHandler($event, endDp)"
+                            panelClass="example-month-picker">
+            </mat-datepicker>
+          </mat-form-field>
+  
+        </div>
+        <button mat-raised-button (click)="submitDates()">Generate</button>
+        <div class="loading-page" *ngIf="loading">
+          <div class="lds-dual-ring"></div>
+          <p>Generating Insights</p>
+        </div>
+        
+      </div>
+    </div>
+    
+  </section>
+
+  <section id="cards">
+    <h2 style="margin-top: 40px;">Complete Overview</h2>
+    
+    <div class="cards-layout" style="padding-top:50px">
+        <div class="income-card">
+          <h3 class="card-title">Income Overview</h3>
+
+          <div class="total">
+            <div class="container">
+              <p>Total Income</p>
+              <h1>&#8377;&nbsp;{{total_income}}</h1>
+            </div>   
+          </div>
+          <div class="subs">
+            <div class="item" style="background-color: #3c6e71;">
+              <p>Salary</p>
+              <p>{{salary}}</p>
+            </div>
+
+            <div class="item" style="background-color: #4ca1cbff;">
+              <p>Business</p>
+              <p>{{business}}</p>
+            </div>
+
+            <div class="item" style="background-color: #ff8080ff;">
+              <p>Investment</p>
+              <p>{{investment}}</p>
+            </div>
+
+            <div class="item" style="background-color: #d9b3ffff;">
+              <p>Rental</p>
+              <p>{{rental}}</p>
+            </div>
+
+            <div class="item" style="background-color: #feb236ff;">
+              <p>Others</p>
+              <p>{{income_others}}</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="expense-card">
+          <h3 class="card-title">Expense Overview</h3>
+
+          <div class="total">
+            <div class="container">
+              <p>Total Expense</p>
+              <h1 style="background-color: #35363a;">&#8377;&nbsp;{{total_expense}}</h1>
+            </div>  
+          </div>
+          <!-- ',''',''-->
+          <div class="subs">
+            <div class="item" style="background-color: #ff8080ff;">
+              <p>Housing</p>
+              <p>{{housing}}</p>
+            </div>
+
+            <div class="item" style="background-color: #d9b3ffff;">
+              <p>Transport</p>
+              <p>{{transport}}</p>
+            </div>
+
+            <div class="item" style="background-color: #feb236ff;">
+              <p>Food</p>
+              <p>{{food}}</p>
+            </div>
+
+            <div class="item" style="background-color: #6b5b95ff;">
+              <p>Utilities</p>
+              <p>{{utilities}}</p>
+            </div>
+
+            <div class="item" style="background-color: #4ca1cbff;">
+              <p>Personal</p>
+              <p>{{personal}}</p>
+            </div>
+
+            <div class="item" style="background-color: #1b2f45ff;">
+              <p>Others</p>
+              <p>{{expense_others}}</p>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="btns">
+      <button style="background-color: #1b2f45;" (click)="getCSV('income')">Download</button>
+      <button style="background-color:#35363a;" (click)="getCSV('expense')">Download</button>
+    </div>
+
+  </section>
+   
+  <section id="income-summary">
+    <div id="income-div">
+      <div class="top">
+        <h2>Income Analysis</h2>
+        <button mat-mini-fab style="background-color: #3f51b5" (click)="downloadImg('income-div')">
+          <mat-icon>download</mat-icon>
+        </button>
+      </div>
+      <div class="cont" style="display: flex;flex-direction:column;justify-content:center;gap:30px;height:70%;margin-top:40px">
+        
+        <div class="info">
+          <div class="info-card" style="background-color: 	#227c9d;">
+            <p class="info-card-header">Avg Income / Day</p>
+            <div class="container">
+              <div class="val">
+                <h2>&#8377;&nbsp;{{avg_income}}</h2>
+              </div>
+              <div class="symbol">
+                <span class="material-symbols-outlined">
+                  bar_chart_4_bars
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="info-card" style="background-color: #06d6a0;">
+            <p class="info-card-header">Total Savings</p>
+            <div class="container">
+              <div class="val">
+                <h2>&#8377;&nbsp;{{total_savings}}</h2>
+              </div>
+              <div class="symbol">
+                <span class="material-symbols-outlined">
+                  account_balance_wallet
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="info-card" style="background-color: #ef476f;">
+            <p class="info-card-header">Top Source of Income</p>
+            <div class="container">
+              <div class="val" style="font-size:25px">
+                <h2>{{top_income_source}}</h2>
+              </div>
+              <div class="symbol">
+                <span class="material-symbols-outlined">
+                  rocket_launch
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="charts">
+          <div class="container">
+            <canvas id="income-area">       </canvas>
+            
+          </div>
+          
+          <div class="container" >
+            <canvas id="income-pie">       </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </section>
+
+  <section id="expense-summary">
+    <div id="expense-div">
+      <div class="top">
+        <h2>Expense Analysis</h2>
+        <button mat-mini-fab style="background-color:#3f51b5" (click)="downloadImg('expense-div')">
+          <mat-icon>download</mat-icon>
+        </button>
+      </div>
+      <div class="cont" style="display: flex;flex-direction:column;justify-content:center;gap:30px;height:70%;margin-top: 40px;">
+        <div class="info">
+          <div class="info-card" style="background-color: #3c6e71;">
+            <p class="info-card-header">Avg Expense / Day</p>
+            <div class="container">
+              <div class="val">
+                <h2>&#8377;&nbsp;{{avg_expense}}</h2>
+              </div>
+              <div class="symbol">
+                <span class="material-symbols-outlined">
+                  payments
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="info-card" style="background-color: #e07a5f;">
+            <p class="info-card-header">Expense-to-Income Ratio</p>
+            <div class="container">
+              <div class="val">
+                <h2>{{expense_income_ratio}}%</h2>
+              </div>
+              <div class="symbol">
+                <span class="material-symbols-outlined">
+                  balance
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="info-card" style="background-color: #3d405b;">
+            <p class="info-card-header">Top Category of Expense</p>
+            <div class="container">
+              <div class="val" style="font-size:25px">
+                <h2>{{top_expense_cat}}</h2>
+              </div>
+              <div class="symbol">
+                <span class="material-symbols-outlined">
+                  shopping_bag
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="charts">
+          <div class="container">
+            <canvas id="expense-area">       </canvas>
+            
+          </div>
+          
+          <div class="container" >
+            <canvas id="expense-pie">       </canvas>
+          </div>
+        </div>
+  
+        
+  
+      </div>
+  
+    </div>
+    
+    
+  
+  </section>
+
+</div>
+    

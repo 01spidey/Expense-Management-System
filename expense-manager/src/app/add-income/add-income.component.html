@@ -1,0 +1,41 @@
+<h3>{{title}}</h3>
+
+<div class="card">
+        <form (ngSubmit)="onSubmit()" [formGroup]="incomeForm" >
+            
+            <div class="item">
+                <label>Description</label>
+                <input type="text" placeholder="Description" formControlName="desc">
+            </div>
+            
+        
+            <div class="item">
+                <label>Source</label>
+                <select formControlName="src">
+                    <option value="" disabled selected>-- select --</option>
+                    <option value="Salary">Salary</option>
+                    <option value="Business">Business</option>
+                    <option value="Investment">Investment</option>
+                    <option value="Rental">Rental</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            
+            <div class="item">
+                <label>Date of Expense</label>
+                <input type="date" formControlName="date">
+            </div>
+            
+            <div class="item">
+                <label>Amount</label>
+                <input type="text" placeholder="Amount" formControlName="amt">
+            </div>
+            
+
+            <div class="btns">
+                <button id="add">{{action}}</button>
+                <button type="button" id="close" (click)="close()">Close</button>
+            </div>
+            
+        </form>
+</div>

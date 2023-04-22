@@ -1,0 +1,50 @@
+<header>
+    <div class="logo">
+        <span class="material-symbols-outlined">
+            savings
+        </span>
+        <p>SpendWise</p>
+    </div>
+    <div class="user">
+        <p>{{user}}</p>
+    </div>
+</header>
+
+<div class="sidebar">
+    <div class="menu">
+        <div class="item" (click)="setActive('my_expense')" [ngClass]="{'active-title':component=='my_expense'}">
+            <span class="material-symbols-outlined">
+                credit_card
+            </span>
+            <p>My Expense</p>
+        </div>
+
+        <div class="item" (click)="setActive('my_income')" [ngClass]="{'active-title':component=='my_income'}">
+            <span class="material-symbols-outlined">
+                payments
+            </span>
+            <p>My Income</p>        
+        </div>
+
+        <div class="item" (click)="setActive('summary')" [ngClass]="{'active-title':component=='summary'}">
+            <span class="material-symbols-outlined">
+                monitoring
+            </span>
+            <p>Financial Overview</p>
+        </div>
+
+        <div class="item" id="logout" (click)="logout()">
+            <span class="material-symbols-outlined">
+                logout
+            </span>
+            <p>Logout</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="content">
+    <app-myexpense *ngIf="component=='my_expense'"></app-myexpense>
+    <app-myincome *ngIf="component=='my_income'"></app-myincome>
+    <app-summary *ngIf="component=='summary'"></app-summary>
+</div>
